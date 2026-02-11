@@ -1,0 +1,66 @@
+.budgets-page {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.month-selector-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.month-selector-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.month-selector {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  transition: width 0.3s;
+  border-radius: 4px;
+
+  &.success { background: #10b981; }
+  &.warning { background: #f59e0b; }
+  &.danger { background: #ef4444; }
+}
+
+.progress-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  min-width: 40px;
+  text-align: right;
+}
+
+.amount-positive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.amount-negative {
+  color: #ef4444;
+  font-weight: 600;
+}
