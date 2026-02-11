@@ -25,7 +25,6 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  refreshMe: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,16 +42,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     transactionsCount: data.transactionsCount,
   });
 
-  const refreshMe = async () => {
-    try {
-      const userData = await api.getMe();
-      const user = normalizeMe(userData);
-      setUser(user);
-      return user;
-    } catch {
-      return null;
-    }
-  };
 
   useEffect(() => {
     const initAuth = async () => {
@@ -107,7 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, refreshMe }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout}}>
       {children}
     </AuthContext.Provider>
   );

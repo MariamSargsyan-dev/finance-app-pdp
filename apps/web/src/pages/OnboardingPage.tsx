@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { useToast } from '../contexts/ToastContext';
-import { useAuth } from '../contexts/AuthContext';
-import { Button } from '../components/ui';
+import { Button } from '@/components/ui';
 import './OnboardingPage.scss';
 
 type PackKey = 'personal' | 'family' | 'freelancer' | 'student' | 'empty';
@@ -84,7 +83,6 @@ export function OnboardingPage() {
   const [applying, setApplying] = useState(false);
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { refreshMe } = useAuth();
 
   useEffect(() => {
     const load = async () => {
@@ -110,7 +108,6 @@ export function OnboardingPage() {
     setApplying(true);
     try {
       await api.applyStarterPack(selectedKey);
-      await refreshMe();
       showToast('Workspace set up successfully', 'success');
       navigate('/dashboard');
     } catch (err: any) {
@@ -124,7 +121,6 @@ export function OnboardingPage() {
     setApplying(true);
     try {
       await api.applyStarterPack('empty');
-      await refreshMe();
       showToast('You can set up later from settings', 'success');
       navigate('/dashboard');
     } catch (err: any) {

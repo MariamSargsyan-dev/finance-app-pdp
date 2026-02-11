@@ -30,7 +30,6 @@ export function TransactionsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [accounts, setAccounts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [transactionToDelete, setTransactionToDelete] = useState<string | null>(null);
@@ -62,7 +61,6 @@ export function TransactionsPage() {
   }, [filters]);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const [txns, accts, cats] = await Promise.all([
         api.getTransactions(),
@@ -77,8 +75,6 @@ export function TransactionsPage() {
       }
     } catch (error) {
       console.error('Failed to load data', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -341,7 +337,7 @@ export function TransactionsPage() {
                   <div className="table-actions">
                     <Button
                       variant="ghost"
-                      onClick={() => openEditModal(row)}
+                      onClick={() => openEditModal(row as Transaction)}
                       style={{ padding: '4px 8px', fontSize: '12px' }}
                     >
                       Edit
